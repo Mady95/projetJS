@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "transactions")
 public class Transaction {
@@ -17,6 +19,9 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_account_id", nullable = false)
     private BankAccount bankAccount;
+
+    @Column(name = "transaction_date", nullable = false)
+    private LocalDateTime transactionDate;
 
     // Getters et setters
     public Long getId() {
@@ -49,5 +54,19 @@ public class Transaction {
 
     public void setBankAccount(BankAccount bankAccount) {
         this.bankAccount = bankAccount;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    // Initialiser automatiquement la date de transaction lors de l'insertion
+    @PrePersist
+    protected void onCreate() {
+        this.transactionDate = LocalDateTime.now();
     }
 }

@@ -15,6 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -139,6 +144,81 @@ public class AuthController {
         model.addAttribute("accountName", account.getAccountName());
         return "transactions"; // Assurez-vous que `transactions.html` existe dans `/templates`
     }
+
+    @PostMapping("/accounts/add")
+    public String addAccount(@RequestParam String accountName,
+                             @RequestParam Double balance,
+                             HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("loggedInUserId");
+        if (userId == null) {
+            return "redirect:/login"; // Redirige vers la connexion si l'utilisateur n'est pas connecté
+        }
+
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            model.addAttribute("errorMessage", "Utilisateur non trouvé !");
+            return "accounts";
+        }
+
+        BankAccount newAccount = new BankAccount();
+        newAccount.setAccountName(accountName);
+        newAccount.setBalance(balance);
+        newAccount.setUser(user);
+
+        bankAccountRepository.save(newAccount); // Sauvegarde du nouveau compte
+
+        return "redirect:/accounts"; // Redirige vers la liste des comptes
+    }
+
+    @PostMapping("/accounts/delete/{accountId}")
+    public String deleteAccount(@PathVariable Long accountId, HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("loggedInUserId");
+        if (userId == null) {
+            return "redirect:/login"; // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+        }
+
+        // Vérifie que le compte appartient à l'utilisateur connecté
+        BankAccount account = bankAccountRepository.findById(accountId).orElse(null);
+        if (account == null || !account.getUser().getId().equals(userId)) {
+            model.addAttribute("errorMessage", "Aucun compte trouvé ou vous n'avez pas les droits pour le supprimer.");
+            return "accounts";
+        }
+
+        bankAccountRepository.delete(account); // Supprime le compte de la base de données
+        return "redirect:/accounts"; // Redirige vers la liste des comptes
+    }
+
+    @PostMapping("/transactions/add/{accountId}")
+    public String addTransaction(
+            @PathVariable("accountId") Long accountId,
+            @RequestParam("amount") Double amount,
+            @RequestParam("description") String description,
+            HttpSession session,
+            Model model) {
+
+        Long userId = (Long) session.getAttribute("loggedInUserId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        BankAccount account = bankAccountRepository.findById(accountId).orElse(null);
+        if (account == null || !account.getUser().getId().equals(userId)) {
+            model.addAttribute("errorMessage", "Compte non trouvé ou accès non autorisé.");
+            return "transactions";
+        }
+
+        Transaction transaction = new Transaction();
+        transaction.setAmount(amount);
+        transaction.setDescription(description);
+        transaction.setBankAccount(account);
+        transaction.setTransactionDate(LocalDateTime.now()); // Ajout de la date actuelle
+
+        transactionRepository.save(transaction);
+
+        return "redirect:/transactions/" + accountId;
+    }
+
+
 
 
     @PostMapping("/api/login")

@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil</title>
+  <title>Comptes Bancaires</title>
   <link rel="stylesheet" href="/style.css">
 </head>
+<body>
+<h1>Vos Comptes Bancaires</h1>
+
 <table>
   <thead>
   <tr>
@@ -20,8 +23,23 @@
     <td th:text="${account.balance}">0.00</td>
     <td>
       <a th:href="@{/transactions/{accountId}(accountId=${account.id})}">Voir les transactions</a>
+      <form th:action="@{/accounts/delete/{accountId}(accountId=${account.id})}" method="post" style="display: inline;">
+        <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer ce compte ?');">Supprimer</button>
+      </form>
     </td>
   </tr>
   </tbody>
 </table>
+
+<h2>Ajouter un nouveau compte</h2>
+<form action="/accounts/add" method="post">
+  <label for="accountName">Nom du compte :</label>
+  <input type="text" id="accountName" name="accountName" required>
+
+  <label for="balance">Solde initial :</label>
+  <input type="number" id="balance" name="balance" step="0.01" required>
+
+  <button type="submit">Ajouter</button>
+</form>
+</body>
 </html>

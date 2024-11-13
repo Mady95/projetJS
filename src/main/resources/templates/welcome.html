@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Bienvenue, <span th:text="${username}">Utilisateur</span> !</h1>
+    <p>Vous êtes connecté avec succès.</p>
+    <div>
+        <button onclick="window.location.href='/profile'">Voir mon profil</button>
+        <button onclick="window.location.href='/logout'" class="secondary-button">Se déconnecter</button>
+    </div>
+</div>
+</body>
+</html>

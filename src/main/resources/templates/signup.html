@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Inscription</h1>
+    <form action="/signup" method="post">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="username" required>
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Mot de passe :</label>
+        <div style="position: relative;">
+            <input type="password" id="password" name="password" required>
+            <button type="button" id="togglePassword">👁</button>
+        </div>
+        <p class="error" th:if="${error != ''}" th:text="${error}"></p>
+        <button type="submit">S'inscrire</button>
+    </form>
+    <button onclick="window.location.href='/login'" class="secondary-button">J'ai déjà un compte</button>
+</div>
+<script src="/script.js"></script>
+</body>
+</html>

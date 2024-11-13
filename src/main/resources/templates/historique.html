@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des connexions</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Historique des connexions</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Adresse IP</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${historique}">
+            <td th:text="${entry[0]}"></td>
+            <td th:text="${entry[1]}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <button onclick="window.location.href='/profile'" class="secondary-button">Retour</button>
+</div>
+</body>
+</html>

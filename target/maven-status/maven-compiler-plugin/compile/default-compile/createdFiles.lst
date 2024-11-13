@@ -1,4 +1,11 @@
-com/example/demo/UserRepository.class
+com/example/demo/repository/UserRepository.class
+com/example/demo/repository/BankAccountRepository.class
+com/example/demo/model/BankAccount.class
+com/example/demo/repository/HistoriqueConnexionRepository.class
 com/example/demo/ProjetsbcApplication.class
-com/example/demo/AuthController.class
-com/example/demo/User.class
+com/example/demo/model/HistoriqueConnexion.class
+com/example/demo/controller/LoginRequest.class
+com/example/demo/model/User.class
+com/example/demo/model/Transaction.class
+com/example/demo/controller/AuthController.class
+com/example/demo/repository/TransactionRepository.class

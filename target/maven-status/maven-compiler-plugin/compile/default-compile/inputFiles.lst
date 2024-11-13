@@ -1,4 +1,10 @@
-/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/UserRepository.java
+/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/repository/HistoriqueConnexionRepository.java
+/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/model/Transaction.java
+/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/repository/UserRepository.java
+/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/model/BankAccount.java
 /Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/ProjetsbcApplication.java
-/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/User.java
-/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/AuthController.java
+/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/model/User.java
+/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/repository/BankAccountRepository.java
+/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/controller/AuthController.java
+/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/repository/TransactionRepository.java
+/Users/madysambake/Downloads/SpringBootUserAuth/src/main/java/com/example/demo/model/HistoriqueConnexion.java

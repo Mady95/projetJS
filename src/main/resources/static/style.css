@@ -103,6 +103,21 @@ button:hover {
     opacity: 1;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
 #togglePassword {
     position: absolute;
     right: 10px;

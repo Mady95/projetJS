@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<table>
+  <thead>
+  <tr>
+    <th>Nom du compte</th>
+    <th>Solde</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="account : ${accounts}">
+    <td th:text="${account.accountName}">Nom du compte</td>
+    <td th:text="${account.balance}">0.00</td>
+    <td>
+      <a th:href="@{/transactions/{accountId}(accountId=${account.id})}">Voir les transactions</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</html>

@@ -9,17 +9,46 @@
 <body>
 <div class="container">
     <h1>Connexion</h1>
-    <form action="/login" method="post">
+    <form id="loginForm">
         <label for="email">Email :</label>
         <input type="email" id="email" name="email" required>
         <label for="password">Mot de passe :</label>
         <input type="password" id="password" name="password" required>
-        <p class="error" th:if="${error != ''}" th:text="${error}"></p>
+        <p class="error" id="errorMessage" style="display: none;"></p>
         <button type="submit">Se connecter</button>
-        <button onclick="window.location.href='/signup'" class="secondary-button">J'ai déjà un compte</button>
-
+        <button type="button" onclick="window.location.href='/signup'" class="secondary-button">Je n'ai pas de compte</button>
     </form>
 </div>
-<script src="/script.js"></script>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Empêche la soumission classique
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email: email, password: password})
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Identifiants incorrects !');
+            }
+            return response.text();
+        })
+        .then(message => {
+            alert(message); // Message de succès
+            window.location.href = '/welcome'; // Redirection après succès
+        })
+        .catch(error => {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'block';
+            errorMessage.textContent = error.message;
+        });
+    });
+</script>
 </body>
 </html>

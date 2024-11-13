@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1 th:text="'Transactions pour le compte : ' + ${accountName}">Transactions</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Montant</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transaction : ${transactions}">
+        <td th:text="${transaction.amount}">0.00</td>
+        <td th:text="${transaction.description}">Description</td>
+    </tr>
+    </tbody>
+</table>
+<a href="/accounts">Retour à mes comptes</a>
+</body>
+</html>
